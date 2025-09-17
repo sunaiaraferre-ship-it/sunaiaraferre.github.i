@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castelinho - Cuidado Profissional para Crianças</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #334155;
+        }
+        .container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center">
+    <!-- Header -->
+    <header class="bg-white shadow-md w-full py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 left-0 z-50">
+        <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-3.6 2.38-6.66 5.67-7.79l-1.89 4.72C8.36 10.96 10.02 12 12 12s3.64-1.04 4.22-2.07L16.33 4.21C19.62 5.34 22 8.4 22 12c0 4.41-3.59 8-8 8zm-2.73-7.5l-1.89-4.72C7.38 6.66 4 9.6 4 12c0 1.25.32 2.45.92 3.53l2.84-2.84-1.49-3.73zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm1.27-7.5l-1.49 3.73 2.84 2.84c.6-1.08.92-2.28.92-3.53 0-2.4-1.48-4.44-3.5-5.3l-1.89 4.72z"/>
+            </svg>
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Castelinho</h1>
+        </div>
+        <nav>
+            <ul class="flex space-x-4 md:space-x-6">
+                <li><a href="#servicos" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Serviços</a></li>
+                <li><a href="#sobre" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Sobre Nós</a></li>
+                <li><a href="#contato" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Agendar Vaga</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full pt-20 px-4 md:px-12">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-3xl shadow-xl p-8 md:p-16 mb-12 text-center transform transition-transform duration-500 hover:scale-105">
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">Cuidado e Carinho para Seus Filhos</h2>
+            <p class="text-lg md:text-xl font-light mb-4">Babás profissionais e de confiança para todas as suas necessidades de cuidado infantil. Deixe-nos cuidar do seu bem mais precioso.</p>
+            <p class="text-lg md:text-xl font-bold mb-8">Ligue agora: <a href="tel:+5535997134503" class="underline hover:text-white transition-colors duration-300">(35) 99713-4503</a></p>
+            <a href="#contato" class="bg-white text-pink-500 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-colors duration-300">Agendar Vaga</a>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicos" class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Nossos Serviços</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Cuidado Regular</h3>
+                    <p class="text-gray-600">Babás disponíveis para horários fixos, cuidando das crianças enquanto você trabalha.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 8h-1.5v2h-2v2h2V14H19v2h-2v2h-2v-2h-2v-2h2v-2h-2v-2h2V8H19zM15 15h2v2h-2v-2zM15 11h2v2h-2v-2zM15 7h2v2h-2V7zM11 15h2v2h-2v-2zM11 11h2v2h-2v-2zM11 7h2v2h-2V7zM7 15h2v2H7v-2zM7 11h2v2H7v-2zM7 7h2v2H7V7zM3 15h2v2H3v-2zM3 11h2v2H3v-2zM3 7h2v2H3V7z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Eventos e Festas</h3>
+                    <p class="text-gray-600">Babás para cuidar das crianças durante eventos, casamentos ou festas de aniversário.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-4-4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm8 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Emergências</h3>
+                    <p class="text-gray-600">Serviço de última hora para situações inesperadas. Estamos prontos para ajudar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="depoimentos" class="bg-gray-200 rounded-3xl shadow-xl p-8 md:p-12 mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">O Que Nossos Clientes Dizem</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-md">
+                    <p class="italic text-gray-600 mb-4">"A Castelinho transformou a nossa viagem para Monte Verde. Conseguimos aproveitar a noite sem preocupações, sabendo que nossa filha estava em ótimas mãos. A babá foi super carinhosa e profissional."</p>
+                    <p class="font-semibold text-right">- Fernanda G., Turista</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-md">
+                    <p class="italic text-gray-600 mb-4">"Precisamos de uma babá de última hora para um evento e a Castelinho nos atendeu rapidamente. A babá chegou no horário, foi extremamente atenciosa com as crianças e nos deixou muito tranquilos. Serviço de excelência!"</p>
+                    <p class="font-semibold text-right">- Carlos M., Morador de Monte Verde</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre" class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Sobre Nós</h2>
+            <p class="text-gray-600 text-center text-lg max-w-3xl mx-auto">
+                No Castelinho, nosso objetivo é oferecer a paz de espírito aos pais, sabendo que seus filhos estão em boas mãos. Nossas babás são rigorosamente selecionadas, com verificação de antecedentes e referências, para garantir o mais alto nível de segurança e cuidado. Nosso compromisso é com o bem-estar e a felicidade das crianças. Atendemos a cidade de **Monte Verde, Minas Gerais** e região.
+            </p>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="contato" class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Agende sua Vaga</h2>
+            <form id="booking-form" class="space-y-6 max-w-2xl mx-auto">
+                <div>
+                    <label for="userName" class="block text-sm font-medium text-gray-700">Seu Nome</label>
+                    <input type="text" id="userName" name="userName" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div>
+                    <label for="userEmail" class="block text-sm font-medium text-gray-700">Seu E-mail</label>
+                    <input type="email" id="userEmail" name="userEmail" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div>
+                    <label for="childName" class="block text-sm font-medium text-gray-700">Nome da Criança</label>
+                    <input type="text" id="childName" name="childName" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div>
+                    <label for="childAge" class="block text-sm font-medium text-gray-700">Idade da Criança</label>
+                    <input type="number" id="childAge" name="childAge" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div>
+                    <label for="serviceType" class="block text-sm font-medium text-gray-700">Tipo de Serviço</label>
+                    <select id="serviceType" name="serviceType" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                        <option value="Diária">Diária</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensal">Mensal</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="requiredDay" class="block text-sm font-medium text-gray-700">Dia da Semana</label>
+                    <input type="text" id="requiredDay" name="requiredDay" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div>
+                    <label for="requiredTime" class="block text-sm font-medium text-gray-700">Horário</label>
+                    <input type="text" id="requiredTime" name="requiredTime" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                </div>
+                <div id="status-message" class="text-center font-bold"></div>
+                <div class="text-center">
+                    <button type="submit" class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300">Agendar Vaga</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Admin Panel Section -->
+        <section id="admin-panel" class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-12 hidden">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Painel de Administração</h2>
+            <div id="bookings-list" class="space-y-4">
+                <!-- Bookings will be rendered here -->
+                <p class="text-center text-gray-500">Nenhum agendamento pendente.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-gray-800 text-gray-300 py-6 px-4 md:px-12 text-center rounded-t-3xl shadow-inner flex justify-between items-center">
+        <p>&copy; 2024 Castelinho. Todos os direitos reservados.</p>
+        <button id="admin-login-btn" class="text-pink-300 hover:text-white transition-colors duration-300">Login do Admin</button>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // IMPORTANTE: Você precisa substituir as chaves abaixo pela sua própria configuração do Firebase.
+        // Crie um projeto no Firebase (firebase.google.com), vá em "Project settings" e copie o objeto de configuração.
+        // Se você não fizer isso, o formulário de agendamento não funcionará.
+        const firebaseConfig = {
+            apiKey: "SEU_API_KEY",
+            authDomain: "SEU_AUTH_DOMAIN",
+            projectId: "SEU_PROJECT_ID",
+            storageBucket: "SEU_STORAGE_BUCKET",
+            messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+            appId: "SEU_APP_ID"
+        };
+
+        // Inicialize o Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        let userId = null;
+
+        // Autenticação anônima para que o usuário possa interagir com o site
+        auth.signInAnonymously()
+            .then(() => {
+                userId = auth.currentUser.uid;
+            })
+            .catch((error) => {
+                console.error("Erro ao autenticar anonimamente:", error);
+            });
+
+        const bookingForm = document.getElementById('booking-form');
+        const statusMessage = document.getElementById('status-message');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const bookingsList = document.getElementById('bookings-list');
+
+        // Form submission handler
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(bookingForm);
+            const data = {
+                userName: formData.get('userName'),
+                userEmail: formData.get('userEmail'),
+                childName: formData.get('childName'),
+                childAge: parseInt(formData.get('childAge')),
+                serviceType: formData.get('serviceType'),
+                requiredDay: formData.get('requiredDay'),
+                requiredTime: formData.get('requiredTime'),
+                status: 'Pendente',
+                userId: userId,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // As regras de segurança para o seu banco de dados no Firebase devem ser ajustadas para permitir a escrita de dados
+                await db.collection('bookings').add(data);
+                statusMessage.textContent = 'Agendamento enviado com sucesso! Aguarde alguns minutos, e logo entraremos em contato.';
+                bookingForm.reset();
+            } catch (error) {
+                console.error("Erro ao adicionar agendamento: ", error);
+                statusMessage.textContent = 'Erro ao enviar agendamento. Verifique se a sua configuração do Firebase e as regras de segurança estão corretas.';
+            }
+        });
+
+        // Admin login functionality
+        adminLoginBtn.addEventListener('click', () => {
+            const password = prompt("Por favor, digite a senha de administrador:");
+            if (password === 'admin123') {
+                adminPanel.classList.remove('hidden');
+                // Listen for new bookings
+                db.collection('bookings').onSnapshot(querySnapshot => {
+                    const bookings = [];
+                    querySnapshot.forEach(doc => {
+                        bookings.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderBookings(bookings);
+                });
+            } else if (password) {
+                alert("Senha incorreta!");
+            }
+        });
+
+        // Function to render bookings in the admin panel
+        function renderBookings(bookings) {
+            bookingsList.innerHTML = '';
+            if (bookings.length === 0) {
+                bookingsList.innerHTML = '<p class="text-center text-gray-500">Nenhum agendamento pendente.</p>';
+                return;
+            }
+
+            bookings.forEach(booking => {
+                const bookingCard = document.createElement('div');
+                bookingCard.className = `bg-gray-50 rounded-lg p-4 shadow-md flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 ${booking.status === 'Aceito' ? 'border-l-4 border-green-500' : (booking.status === 'Rejeitado' ? 'border-l-4 border-red-500' : 'border-l-4 border-yellow-500')}`;
+                
+                const bookingDetails = `
+                    <div>
+                        <p><strong>Nome:</strong> ${booking.userName}</p>
+                        <p><strong>E-mail:</strong> ${booking.userEmail}</p>
+                        <p><strong>Criança:</strong> ${booking.childName} (${booking.childAge} anos)</p>
+                        <p><strong>Tipo:</strong> ${booking.serviceType}</p>
+                        <p><strong>Data/Hora:</strong> ${booking.requiredDay}, ${booking.requiredTime}</p>
+                        <p><strong>Status:</strong> ${booking.status}</p>
+                        <p class="text-xs text-gray-400"><strong>ID do Usuário:</strong> ${booking.userId}</p>
+                    </div>
+                `;
+
+                bookingCard.innerHTML = bookingDetails;
+                
+                if (booking.status === 'Pendente') {
+                    const actions = document.createElement('div');
+                    actions.className = 'flex space-x-2';
+                    const acceptBtn = document.createElement('button');
+                    acceptBtn.textContent = 'Aceitar e Notificar por E-mail';
+                    acceptBtn.className = 'bg-green-500 text-white text-sm font-bold py-2 px-4 rounded-full hover:bg-green-600 transition-colors duration-300';
+                    acceptBtn.addEventListener('click', () => {
+                        const emailSubject = encodeURIComponent("Confirmação de Agendamento - Castelinho");
+                        const emailBody = encodeURIComponent(`Olá ${booking.userName},\n\nSua vaga para o serviço de babá no Castelinho foi aceita! Entraremos em contato em breve para confirmar os detalhes.\n\nAtenciosamente,\nEquipe Castelinho`);
+                        window.location.href = `mailto:${booking.userEmail}?subject=${emailSubject}&body=${emailBody}`;
+                        updateBookingStatus(booking.id, 'Aceito');
+                    });
+
+                    const rejectBtn = document.createElement('button');
+                    rejectBtn.textContent = 'Rejeitar';
+                    rejectBtn.className = 'bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-full hover:bg-red-600 transition-colors duration-300';
+                    rejectBtn.addEventListener('click', () => updateBookingStatus(booking.id, 'Rejeitado'));
+
+                    actions.appendChild(acceptBtn);
+                    actions.appendChild(rejectBtn);
+                    bookingCard.appendChild(actions);
+                }
+
+                bookingsList.appendChild(bookingCard);
+            });
+        }
+
+        // Function to update booking status
+        async function updateBookingStatus(bookingId, status) {
+            try {
+                const bookingRef = db.collection('bookings').doc(bookingId);
+                await bookingRef.update({ status: status });
+            } catch (error) {
+                console.error("Erro ao atualizar status: ", error);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
