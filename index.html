@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castelinho - Cuidado Profissional para Crianças</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #334155;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: white;
+        }
+        .status-Pendente { background-color: #f97316; }
+        .status-Ativo { background-color: #22c55e; }
+        .status-Cancelado { background-color: #ef4444; }
+        .status-Pago { background-color: #3b82f6; }
+        .status-Nao-Pago { background-color: #f97316; }
+        .hidden { display: none; }
+        .popup-content {
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .popup-content.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-pink-600">Castelinho</h1>
+            <nav>
+                <button id="admin-login-btn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 transition-colors duration-300">
+                    Área do Administrador
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 mt-8">
+
+        <section id="booking-section" class="bg-white rounded-xl shadow-lg p-6 lg:p-8">
+            <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">Agende sua Vaga</h2>
+            <form id="booking-form" class="space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Informações do Responsável</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="userName" class="block text-sm font-medium text-gray-700">Seu Nome Completo</label>
+                            <input type="text" id="userName" name="userName" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="userEmail" class="block text-sm font-medium text-gray-700">Seu Email</label>
+                            <input type="email" id="userEmail" name="userEmail" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="userPhone" class="block text-sm font-medium text-gray-700">Seu Telefone (Whatsapp)</label>
+                            <input type="tel" id="userPhone" name="userPhone" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Crianças</h3>
+                    <div id="children-container" class="space-y-6">
+                        <div class="child-fields p-4 border rounded-md shadow-sm bg-gray-50">
+                            <h4 class="text-lg font-bold mb-4">Criança 1</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="childName_1" class="block text-sm font-medium text-gray-700">Nome da Criança</label>
+                                    <input type="text" id="childName_1" name="childName_1" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                                </div>
+                                <div class="flex items-end space-x-4">
+                                    <div class="w-2/3">
+                                        <label for="childAge_1" class="block text-sm font-medium text-gray-700">Idade</label>
+                                        <input type="number" id="childAge_1" name="childAge_1" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                                    </div>
+                                    <div class="w-1/3">
+                                        <label for="ageUnit_1" class="block text-sm font-medium text-gray-700">Unidade</label>
+                                        <select id="ageUnit_1" name="ageUnit_1" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                                            <option value="anos">anos</option>
+                                            <option value="meses">meses</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="specialNeeds_1" class="block text-sm font-medium text-gray-700">Restrições Alimentares / Condições Médicas ou Psicológicas</label>
+                                    <textarea id="specialNeeds_1" name="specialNeeds_1" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="addChildBtn" class="mt-4 bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-full hover:bg-gray-300 transition-colors duration-300 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Adicionar outra criança
+                    </button>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Detalhes do Serviço</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="serviceType" class="block text-sm font-medium text-gray-700">Tipo de Serviço</label>
+                            <select id="serviceType" name="serviceType" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                                <option value="">Selecione...</option>
+                                <option value="Diária">Diária</option>
+                                <option value="Semanal">Semanal</option>
+                                <option value="Mensal-Fim-de-Semana">Mensal (Sáb e Dom)</option>
+                                <option value="Mensal">Mensal (Todos os Dias)</option>
+                            </select>
+                        </div>
+
+                        <div id="daily-weekly-fields">
+                            <div>
+                                <label for="requiredDay" class="block text-sm font-medium text-gray-700">Dia Necessário</label>
+                                <input type="date" id="requiredDay" name="requiredDay" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="requiredTime" class="block text-sm font-medium text-gray-700">Horário Necessário</label>
+                                <input type="time" id="requiredTime" name="requiredTime" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                            </div>
+                        </div>
+
+                        <div id="price-display" class="hidden">
+                            <div class="bg-gray-200 p-4 rounded-md text-center">
+                                <p id="total-price" class="text-xl font-bold text-gray-800"></p>
+                                <p id="initial-payment" class="text-sm text-gray-600 mt-2"></p>
+                                <p class="text-xs text-gray-500 mt-1">O valor exato será confirmado após a avaliação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" id="submit-btn" class="w-full bg-pink-500 text-white font-bold py-3 px-6 rounded-full hover:bg-pink-600 transition-all duration-300 text-lg">
+                    Agendar Vaga
+                </button>
+                <p id="status-message" class="mt-4 text-center text-sm font-medium"></p>
+            </form>
+        </section>
+
+        <hr class="my-12">
+
+        <section id="status-check-section" class="bg-white rounded-xl shadow-lg p-6 lg:p-8">
+            <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">Consultar Status</h2>
+            <div class="space-y-4 max-w-lg mx-auto">
+                <div>
+                    <label for="checkEmail" class="block text-sm font-medium text-gray-700">Email da Matrícula</label>
+                    <input type="email" id="checkEmail" name="checkEmail" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <button id="check-status-btn" class="w-full bg-indigo-500 text-white font-bold py-3 px-6 rounded-full hover:bg-indigo-600 transition-colors duration-300">
+                    Consultar Status
+                </button>
+            </div>
+            <div id="status-result" class="mt-6 p-4 rounded-md bg-gray-50 border border-gray-200 hidden"></div>
+        </section>
+
+        <hr class="my-12">
+
+        <section id="dashboard" class="hidden bg-white rounded-xl shadow-lg p-6 lg:p-8">
+            <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">Painel do Administrador</h2>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Agendamentos Pendentes</h3>
+                    <div id="admin-pending-list" class="space-y-4">
+                        </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Matrículas Ativas</h3>
+                    <div id="admin-active-list" class="space-y-4">
+                        </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="confirmation-popup" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 hidden">
+        <div class="popup-content bg-white p-6 rounded-xl shadow-2xl text-center max-w-md w-full">
+            <h3 class="text-2xl font-bold text-green-600 mb-4">Agendamento Concluído!</h3>
+            <p class="text-gray-700 mb-6">Sua solicitação foi enviada com sucesso! Em breve, você receberá um email de confirmação com os detalhes para pagamento.</p>
+            <button id="close-popup-btn" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors duration-300">
+                Fechar
+            </button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // Configuração do Firebase
+        const firebaseConfig = {
+          apiKey: "AIzaSyDV2L02sGFojB_1V2k94fJvWw5F8p7kZg",
+          authDomain: "castelinho-37393.firebaseapp.com",
+          projectId: "castelinho-37393",
+          storageBucket: "castelinho-37393.firebasestorage.app",
+          messagingSenderId: "165370315589",
+          appId: "1:165370315589:web:63d4f8f4a13d789e5a1908",
+          measurementId: "G-0FG2RK7PJS"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        const bookingForm = document.getElementById('booking-form');
+        const statusMessage = document.getElementById('status-message');
+        const dashboard = document.getElementById('dashboard');
+        const adminPendingList = document.getElementById('admin-pending-list');
+        const adminActiveList = document.getElementById('admin-active-list');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const confirmationPopup = document.getElementById('confirmation-popup');
+        const closePopupBtn = document.getElementById('close-popup-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const childrenContainer = document.getElementById('children-container');
+        const addChildBtn = document.getElementById('addChildBtn');
+        const serviceTypeSelect = document.getElementById('serviceType');
+        const dailyWeeklyFields = document.getElementById('daily-weekly-fields');
+        const priceDisplay = document.getElementById('price-display');
+        const checkStatusBtn = document.getElementById('check-status-btn');
+        const statusResultDiv = document.getElementById('status-result');
+        let childCount = 1;
+
+        const prices = {
+            'Diária': 70,
+            'Semanal': 180,
+            'Mensal-Fim-de-Semana-3': 350,
+            'Mensal-Fim-de-Semana-4': 380,
+            'Mensal-Todos-os-Dias-3': 370,
+            'Mensal-Todos-os-Dias-4': 400
+        };
+        const additionalDailyChildFee = 25.00;
+        const additionalWeeklyChildFee = 60.00;
+        const additionalWeekendMonthlyChildFee = 75.00;
+        const additionalAllDaysMonthlyChildFee = 115.00;
+
+
+        // Função para calcular o preço
+        function calculatePrice() {
+            const serviceType = serviceTypeSelect.value;
+            const childrenFields = document.querySelectorAll('.child-fields');
+            const totalChildren = childrenFields.length;
+            let totalPrice = 0;
+            let additionalFee = 0;
+
+            if (serviceType === 'Diária') {
+                additionalFee = additionalDailyChildFee;
+                priceDisplay.classList.add('hidden');
+                dailyWeeklyFields.classList.remove('hidden');
+            } else if (serviceType === 'Semanal') {
+                additionalFee = additionalWeeklyChildFee;
+                priceDisplay.classList.add('hidden');
+                dailyWeeklyFields.classList.remove('hidden');
+            } else if (serviceType === 'Mensal-Fim-de-Semana') {
+                additionalFee = additionalWeekendMonthlyChildFee;
+                dailyWeeklyFields.classList.add('hidden');
+                priceDisplay.classList.remove('hidden');
+            } else if (serviceType === 'Mensal') {
+                additionalFee = additionalAllDaysMonthlyChildFee;
+                dailyWeeklyFields.classList.add('hidden');
+                priceDisplay.classList.remove('hidden');
+            }
+            
+            if (serviceType === 'Diária' || serviceType === 'Semanal') {
+                totalPrice = prices[serviceType] + (totalChildren > 1 ? (totalChildren - 1) * additionalFee : 0);
+            } else if (serviceType === 'Mensal-Fim-de-Semana' || serviceType === 'Mensal') {
+                const childrenAges = Array.from(childrenFields).map(div => {
+                    const age = parseInt(div.querySelector('input[type="number"]').value);
+                    const unit = div.querySelector('select').value;
+                    return unit === 'anos' ? age : age / 12;
+                });
+
+                const allUnder4 = childrenAges.every(age => age <= 4);
+                
+                if (serviceType === 'Mensal-Fim-de-Semana') {
+                    totalPrice = allUnder4 ? prices['Mensal-Fim-de-Semana-3'] : prices['Mensal-Fim-de-Semana-4'];
+                } else { // Mensal (Todos os Dias)
+                    totalPrice = allUnder4 ? prices['Mensal-Todos-os-Dias-3'] : prices['Mensal-Todos-os-Dias-4'];
+                }
+                
+                totalPrice += (totalChildren > 1 ? (totalChildren - 1) * additionalFee : 0);
+
+                document.getElementById('total-price').textContent = `Valor Total: R$ ${totalPrice.toFixed(2)}`;
+                document.getElementById('initial-payment').textContent = `Entrada (50%): R$ ${(totalPrice * 0.5).toFixed(2)}`;
+            }
+        }
+
+        serviceTypeSelect.addEventListener('change', calculatePrice);
+        childrenContainer.addEventListener('change', calculatePrice);
+        
+        // Adiciona um novo bloco de campos para criança
+        addChildBtn.addEventListener('click', () => {
+            childCount++;
+            const newChildDiv = document.createElement('div');
+            newChildDiv.className = 'child-fields p-4 border rounded-md shadow-sm bg-gray-50';
+            newChildDiv.innerHTML = `
+                <h4 class="text-lg font-bold mb-4">Criança ${childCount}</h4>
+                <div class="space-y-4">
+                    <div>
+                        <label for="childName_${childCount}" class="block text-sm font-medium text-gray-700">Nome da Criança</label>
+                        <input type="text" id="childName_${childCount}" name="childName_${childCount}" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                    </div>
+                    <div class="flex items-end space-x-4">
+                        <div class="w-2/3">
+                            <label for="childAge_${childCount}" class="block text-sm font-medium text-gray-700">Idade</label>
+                            <input type="number" id="childAge_${childCount}" name="childAge_${childCount}" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                        </div>
+                        <div class="w-1/3">
+                            <label for="ageUnit_${childCount}" class="block text-sm font-medium text-gray-700">Unidade</label>
+                            <select id="ageUnit_${childCount}" name="ageUnit_${childCount}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300">
+                                <option value="anos">anos</option>
+                                <option value="meses">meses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="specialNeeds_${childCount}" class="block text-sm font-medium text-gray-700">Restrições Alimentares / Condições Médicas ou Psicológicas</label>
+                        <textarea id="specialNeeds_${childCount}" name="specialNeeds_${childCount}" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"></textarea>
+                    </div>
+                </div>
+            `;
+            childrenContainer.appendChild(newChildDiv);
+            // Re-bind the change event to the newly added elements
+            newChildDiv.addEventListener('change', calculatePrice);
+        });
+
+        // Autenticação para a área do administrador
+        adminLoginBtn.addEventListener('click', () => {
+            const password = prompt("Por favor, insira a senha do administrador:");
+            const adminPassword = "castelotiasuh";
+            if (password === adminPassword) {
+                dashboard.classList.remove('hidden');
+                loadAdminBookings();
+                adminLoginBtn.remove();
+                alert("Acesso de administrador concedido.");
+            } else {
+                alert("Senha incorreta.");
+            }
+        });
+
+        // Envio do formulário
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(bookingForm);
+            
+            const children = [];
+            let allChildrenAgesInYears = [];
+            for (let i = 1; i <= childCount; i++) {
+                const age = parseInt(formData.get(`childAge_${i}`));
+                const ageUnit = formData.get(`ageUnit_${i}`);
+                children.push({
+                    name: formData.get(`childName_${i}`),
+                    age: age,
+                    ageUnit: ageUnit,
+                    specialNeeds: formData.get(`specialNeeds_${i}`)
+                });
+                allChildrenAgesInYears.push(ageUnit === 'anos' ? age : age / 12);
+            }
+
+            const serviceType = formData.get('serviceType');
+            let finalPrice = 0;
+            let additionalFee = 0;
+
+            if (serviceType === 'Diária') {
+                additionalFee = additionalDailyChildFee;
+                finalPrice = prices['Diária'] + (children.length > 1 ? (children.length - 1) * additionalFee : 0);
+            } else if (serviceType === 'Semanal') {
+                additionalFee = additionalWeeklyChildFee;
+                finalPrice = prices['Semanal'] + (children.length > 1 ? (children.length - 1) * additionalFee : 0);
+            } else if (serviceType === 'Mensal-Fim-de-Semana') {
+                additionalFee = additionalWeekendMonthlyChildFee;
+                const allUnder4 = allChildrenAgesInYears.every(age => age <= 4);
+                finalPrice = allUnder4 ? prices['Mensal-Fim-de-Semana-3'] : prices['Mensal-Fim-de-Semana-4'];
+                finalPrice += (children.length > 1 ? (children.length - 1) * additionalFee : 0);
+            } else if (serviceType === 'Mensal') {
+                additionalFee = additionalAllDaysMonthlyChildFee;
+                const allUnder4 = allChildrenAgesInYears.every(age => age <= 4);
+                finalPrice = allUnder4 ? prices['Mensal-Todos-os-Dias-3'] : prices['Mensal-Todos-os-Dias-4'];
+                finalPrice += (children.length > 1 ? (children.length - 1) * additionalFee : 0);
+            }
+            
+            const data = {
+                userName: formData.get('userName'),
+                userEmail: formData.get('userEmail'),
+                userPhone: formData.get('userPhone'),
+                children: children,
+                serviceType: serviceType,
+                requiredDay: formData.get('requiredDay'),
+                requiredTime: formData.get('requiredTime'),
+                totalPrice: finalPrice,
+                status: 'Pendente',
+                paymentStatus: 'Aberto',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.classList.remove('bg-pink-500', 'hover:bg-pink-600');
+            submitBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+            submitBtn.disabled = true;
+
+            try {
+                await db.collection('bookings').add(data);
+                
+                submitBtn.textContent = 'Agendado!';
+                submitBtn.classList.remove('bg-gray-400');
+                submitBtn.classList.add('bg-green-500');
+
+                confirmationPopup.classList.remove('hidden');
+                setTimeout(() => {
+                    confirmationPopup.querySelector('.popup-content').classList.add('show');
+                }, 10);
+
+            } catch (error) {
+                console.error("Erro no envio: ", error);
+                statusMessage.textContent = 'Erro ao enviar agendamento. Tente novamente mais tarde.';
+                
+                submitBtn.textContent = 'Agendar Vaga';
+                submitBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                submitBtn.classList.add('bg-pink-500', 'hover:bg-pink-600');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Fechar o pop-up de confirmação
+        closePopupBtn.addEventListener('click', () => {
+            confirmationPopup.querySelector('.popup-content').classList.remove('show');
+            setTimeout(() => {
+                confirmationPopup.classList.add('hidden');
+                bookingForm.reset();
+                submitBtn.textContent = 'Agendar Vaga';
+                submitBtn.classList.remove('bg-green-500', 'cursor-not-allowed');
+                submitBtn.classList.add('bg-pink-500', 'hover:bg-pink-600');
+                submitBtn.disabled = false;
+                priceDisplay.classList.add('hidden');
+                dailyWeeklyFields.classList.remove('hidden');
+            }, 300);
+        });
+
+        // Carregar agendamentos no dashboard do administrador
+        function loadAdminBookings() {
+            db.collection('bookings').orderBy('timestamp', 'desc').onSnapshot(querySnapshot => {
+                renderAdminBookings(querySnapshot.docs);
+            });
+        }
+
+        // Renderizar agendamentos no dashboard
+        function renderAdminBookings(docs) {
+            adminPendingList.innerHTML = '';
+            adminActiveList.innerHTML = '';
+            
+            const pendingBookings = docs.filter(doc => doc.data().status === 'Pendente');
+            const activeBookings = docs.filter(doc => doc.data().status === 'Ativo');
+
+            if (pendingBookings.length === 0) {
+                adminPendingList.innerHTML = '<p class="text-center text-gray-500">Nenhum agendamento pendente.</p>';
+            } else {
+                pendingBookings.forEach(doc => renderPendingBooking(doc));
+            }
+
+            if (activeBookings.length === 0) {
+                adminActiveList.innerHTML = '<p class="text-center text-gray-500">Nenhuma matrícula ativa.</p>';
+            } else {
+                activeBookings.forEach(doc => renderActiveBooking(doc));
+            }
+        }
+
+        function renderPendingBooking(doc) {
+            const booking = { id: doc.id, ...doc.data() };
+            const bookingCard = document.createElement('div');
+            bookingCard.className = `bg-gray-50 rounded-lg p-4 shadow-md flex flex-col md:flex-row justify-between items-start space-y-4 md:space-y-0`;
+
+            let childrenHtml = '';
+            if (booking.children && booking.children.length > 0) {
+                childrenHtml = '<div class="mt-2"><strong>Crianças:</strong>';
+                booking.children.forEach(child => {
+                    childrenHtml += `<p>- ${child.name} (${child.age} ${child.ageUnit})</p>`;
+                    if (child.specialNeeds) {
+                        childrenHtml += `<p class="ml-4 text-sm"><em>Obs:</em> ${child.specialNeeds}</p>`;
+                    }
+                });
+                childrenHtml += '</div>';
+            }
+
+            const bookingDetails = document.createElement('div');
+            bookingDetails.className = 'w-full md:w-2/3';
+
+            const displayDay = booking.serviceType.includes('Mensal') ? booking.serviceType : new Date(booking.requiredDay).toLocaleDateString('pt-BR');
+            const displayTime = booking.serviceType.includes('Mensal') ? '' : `<p><strong>Horário:</strong> ${booking.requiredTime}</p>`;
+            const displayPrice = booking.totalPrice ? `<p><strong>Valor Total:</strong> R$ ${booking.totalPrice.toFixed(2)}</p>` : '';
+
+            bookingDetails.innerHTML = `
+                <div class="space-y-1">
+                    <p><strong>Cliente:</strong> ${booking.userName}</p>
+                    <p><strong>Email:</strong> ${booking.userEmail}</p>
+                    <p><strong>Telefone:</strong> ${booking.userPhone}</p>
+                    ${childrenHtml}
+                    <p><strong>Tipo:</strong> ${booking.serviceType}</p>
+                    <p><strong>Data:</strong> ${displayDay}</p>
+                    ${displayTime}
+                    ${displayPrice}
+                    <p><strong>Status:</strong> <span class="status-badge status-${booking.status}">${booking.status}</span></p>
+                </div>
+            `;
+            
+            const actions = document.createElement('div');
+            actions.className = 'w-full md:w-1/3 flex flex-col space-y-2';
+
+            const confirmBtn = document.createElement('button');
+            confirmBtn.textContent = 'Confirmar';
+            confirmBtn.className = 'bg-green-500 text-white text-sm font-bold py-2 px-4 rounded-full hover:bg-green-600 transition-colors duration-300';
+            confirmBtn.addEventListener('click', async () => {
+                await db.collection('bookings').doc(booking.id).update({ status: 'Ativo' });
+                const emailSubject = encodeURIComponent(`Confirmação de Agendamento - Castelinho`);
+                const emailBody = encodeURIComponent(`Olá ${booking.userName},\n\nSeu agendamento foi confirmado com sucesso!\n\nEstamos ansiosos para cuidar dos seus filhos.\n\nAtenciosamente,\nEquipe Castelinho`);
+                window.location.href = `mailto:${booking.userEmail}?subject=${emailSubject}&body=${emailBody}`;
+            });
+
+            const rejectBtn = document.createElement('button');
+            rejectBtn.textContent = 'Recusar';
+            rejectBtn.className = 'bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-full hover:bg-red-600 transition-colors duration-300';
+            rejectBtn.addEventListener('click', async () => {
+                await db.collection('bookings').doc(booking.id).update({ status: 'Cancelado' });
+                const emailSubject = encodeURIComponent(`Atualização de Agendamento - Castelinho`);
+                const emailBody = encodeURIComponent(`Olá ${booking.userName},\n\nInfelizmente não foi possível confirmar seu agendamento no momento. Por favor, tente agendar um novo horário em nosso site.\n\nAtenciosamente,\nEquipe Castelinho`);
+                window.location.href = `mailto:${booking.userEmail}?subject=${emailSubject}&body=${emailBody}`;
+            });
+            
+            actions.appendChild(confirmBtn);
+            actions.appendChild(rejectBtn);
+
+            bookingCard.appendChild(bookingDetails);
+            bookingCard.appendChild(actions);
+            adminPendingList.appendChild(bookingCard);
+        }
+
+        function renderActiveBooking(doc) {
+            const booking = { id: doc.id, ...doc.data() };
+            const bookingCard = document.createElement('div');
+            bookingCard.className = `bg-white rounded-lg p-4 shadow-md flex flex-col md:flex-row justify-between items-start space-y-4 md:space-y-0`;
+
+            let childrenHtml = '';
+            if (booking.children && booking.children.length > 0) {
+                childrenHtml = '<div class="mt-2"><strong>Crianças:</strong>';
+                booking.children.forEach(child => {
+                    childrenHtml += `<p>- ${child.name} (${child.age} ${child.ageUnit})</p>`;
+                    if (child.specialNeeds) {
+                        childrenHtml += `<p class="ml-4 text-sm"><em>Obs:</em> ${child.specialNeeds}</p>`;
+                    }
+                });
+                childrenHtml += '</div>';
+            }
+
+            const bookingDetails = document.createElement('div');
+            bookingDetails.className = 'w-full md:w-2/3';
+
+            const displayDay = booking.serviceType.includes('Mensal') ? booking.serviceType : new Date(booking.requiredDay).toLocaleDateString('pt-BR');
+            const displayTime = booking.serviceType.includes('Mensal') ? '' : `<p><strong>Horário:</strong> ${booking.requiredTime}</p>`;
+            const displayPaymentStatus = booking.paymentStatus === 'Pago' ? 'Pago' : 'Não Pago';
+            const statusClass = booking.paymentStatus === 'Pago' ? 'status-Pago' : 'status-Nao-Pago';
+
+            bookingDetails.innerHTML = `
+                <div class="space-y-1">
+                    <p><strong>Cliente:</strong> ${booking.userName}</p>
+                    <p><strong>Email:</strong> ${booking.userEmail}</p>
+                    <p><strong>Telefone:</strong> ${booking.userPhone}</p>
+                    ${childrenHtml}
+                    <p><strong>Tipo:</strong> ${booking.serviceType}</p>
+                    <p><strong>Data:</strong> ${displayDay}</p>
+                    ${displayTime}
+                    <p><strong>Valor Total:</strong> <span id="price-${booking.id}">R$ ${booking.totalPrice.toFixed(2)}</span></p>
+                    <p><strong>Status Pagamento:</strong> <span class="status-badge ${statusClass}">${displayPaymentStatus}</span></p>
+                </div>
+            `;
+            
+            const actions = document.createElement('div');
+            actions.className = 'w-full md:w-1/3 flex flex-col space-y-2';
+
+            // Botão para marcar como Pago
+            const paymentBtn = document.createElement('button');
+            paymentBtn.textContent = booking.paymentStatus === 'Pago' ? 'Desmarcar como Pago' : 'Marcar como Pago';
+            paymentBtn.className = `text-white text-sm font-bold py-2 px-4 rounded-full transition-colors duration-300 ${booking.paymentStatus === 'Pago' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-blue-500 hover:bg-blue-600'}`;
+            paymentBtn.addEventListener('click', async () => {
+                const newStatus = booking.paymentStatus === 'Pago' ? 'Aberto' : 'Pago';
+                await db.collection('bookings').doc(booking.id).update({ paymentStatus: newStatus });
+            });
+
+            // Botão para editar preço
+            const editPriceBtn = document.createElement('button');
+            editPriceBtn.textContent = 'Editar Valor';
+            editPriceBtn.className = 'bg-gray-500 text-white text-sm font-bold py-2 px-4 rounded-full hover:bg-gray-600 transition-colors duration-300';
+            editPriceBtn.addEventListener('click', async () => {
+                const newPrice = prompt("Insira o novo valor:");
+                if (newPrice && !isNaN(newPrice)) {
+                    await db.collection('bookings').doc(booking.id).update({ totalPrice: parseFloat(newPrice) });
+                }
+            });
+
+            actions.appendChild(paymentBtn);
+            actions.appendChild(editPriceBtn);
+            
+            bookingCard.appendChild(bookingDetails);
+            bookingCard.appendChild(actions);
+            adminActiveList.appendChild(bookingCard);
+        }
+
+        // Consulta de status do cliente
+        checkStatusBtn.addEventListener('click', async () => {
+            const email = document.getElementById('checkEmail').value;
+            const statusDiv = document.getElementById('status-result');
+            statusDiv.innerHTML = '';
+            statusDiv.classList.add('hidden');
+
+            if (!email) {
+                statusDiv.classList.remove('hidden');
+                statusDiv.innerHTML = '<p class="text-red-500 text-center">Por favor, insira seu email.</p>';
+                return;
+            }
+
+            try {
+                const querySnapshot = await db.collection('bookings').where('userEmail', '==', email).get();
+                if (querySnapshot.empty) {
+                    statusDiv.classList.remove('hidden');
+                    statusDiv.innerHTML = '<p class="text-red-500 text-center">Nenhuma matrícula encontrada para este email.</p>';
+                } else {
+                    statusDiv.classList.remove('hidden');
+                    querySnapshot.forEach(doc => {
+                        const booking = doc.data();
+                        const statusClass = booking.status === 'Ativo' ? 'status-Ativo' : (booking.status === 'Pendente' ? 'status-Pendente' : 'status-Cancelado');
+                        const paymentStatusHtml = booking.paymentStatus ? `<p>Status Pagamento: <span class="status-badge ${booking.paymentStatus === 'Pago' ? 'status-Pago' : 'status-Nao-Pago'}">${booking.paymentStatus === 'Pago' ? 'Pago' : 'Não Pago'}</span></p>` : '';
+                        statusDiv.innerHTML = `
+                            <div class="space-y-2">
+                                <p class="text-lg font-bold">Status da sua Matrícula:</p>
+                                <p><strong>Status:</strong> <span class="status-badge ${statusClass}">${booking.status}</span></p>
+                                ${paymentStatusHtml}
+                                <p><strong>Tipo de Serviço:</strong> ${booking.serviceType}</p>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error("Erro ao consultar status: ", error);
+                statusDiv.classList.remove('hidden');
+                statusDiv.innerHTML = '<p class="text-red-500 text-center">Ocorreu um erro ao consultar. Tente novamente mais tarde.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
